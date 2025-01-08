@@ -3,8 +3,8 @@ import Link from "next/link";
 
 const Navbar = () => {
   return (
-    <header className="bg-white">
-      <div className="navbar shadow-sm max-w-[1224px] py-4 mx-auto">
+    <header className="bg-white shadow-sm w-full">
+      <div className="navbar max-w-[1224px] py-4 mx-auto">
         <div className="navbar-start">
           <div className="dropdown">
             <div

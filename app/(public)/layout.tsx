@@ -1,3 +1,5 @@
+import Footer from "@/components/Footer";
+import Navbar from "@/components/Navbar";
 import React from "react";
 
 export default function LayoutPublic({
@@ -5,5 +7,11 @@ export default function LayoutPublic({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  return <main className="flex-1">{children}</main>;
+  return (
+    <>
+      <Navbar />
+      <main className="flex-1">{children}</main>
+      <Footer />
+    </>
+  );
 }

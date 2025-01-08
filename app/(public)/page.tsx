@@ -1,10 +1,10 @@
-import Navbar from "@/components/Navbar";
+import Hero from "@/components/Hero";
 import React from "react";
 
 export default function HomePage() {
   return (
-    <main className="min-h-100dvh">
-      <Navbar />
-    </main>
+    <section className="mx-auto max-w-[1220px]">
+      <Hero />
+    </section>
   );
 }

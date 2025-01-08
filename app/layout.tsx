@@ -1,15 +1,17 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Poppins, Righteous } from "next/font/google";
 import "./globals.css";
 import ToastSonnerContaier from "@/components/ToasSonner";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const righteous = Righteous({
+  variable: "--font-righteous",
+  weight: "400",
   subsets: ["latin"],
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const poppins = Poppins({
+  variable: "--font-poppins",
+  weight: ["400", "500", "600", "700", "800", "900"],
   subsets: ["latin"],
 });
 
@@ -26,7 +28,7 @@ export default function RootLayout({
   return (
     <html lang="en" data-theme="light">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} min-h-screen flex flex-col`}
+        className={`${righteous.variable} ${poppins.variable} font-poppins min-h-screen flex flex-col`}
       >
         {children}
         <ToastSonnerContaier />

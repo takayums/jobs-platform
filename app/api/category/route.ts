@@ -1,6 +1,5 @@
 import dbConnect from "@/config/db";
 import Category from "@/models/category";
-import { NextRequest } from "next/server";
 
 export async function GET() {
   try {
@@ -14,7 +13,7 @@ export async function GET() {
   }
 }
 
-export async function POST(req: NextRequest) {
+export async function POST(req: Request) {
   const { name, description } = await req.json();
 
   try {

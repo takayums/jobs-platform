@@ -1,6 +1,7 @@
 import React from "react";
 import { Menu } from "lucide-react";
 import Link from "next/link";
+import { SignedIn, SignOutButton } from "@clerk/nextjs";
 
 export default function LayoutAdmin({
   children,
@@ -16,7 +17,11 @@ export default function LayoutAdmin({
             <label htmlFor="my-drawer" className="lg:hidden drawer-button">
               <Menu />
             </label>
-            <button className="btn btn-sm btn-warning">Logout</button>
+            <SignedIn>
+              <SignOutButton>
+                <button className="btn btn-md btn-warning">logout</button>
+              </SignOutButton>
+            </SignedIn>
           </div>
           <div className="mt-4 flex-1">{children}</div>
         </div>

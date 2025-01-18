@@ -6,7 +6,7 @@ export default function OfferList() {
       <h2 className="font-semibold text-center text-[32px] capitalize mb-6">
         Exclusive offers
       </h2>
-      <div className="grid grid-cols-3 gap-6">
+      <div className="grid place-items-center grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         <OfferCard />
         <OfferCard />
         <OfferCard />

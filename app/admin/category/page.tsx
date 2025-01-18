@@ -1,12 +1,12 @@
-import FormCategory from "@/components/FormCategory";
+import TableCategory from "@/components/TableCategory";
 import React from "react";
 
 export default function Category() {
   return (
     <section>
-      <h1 className="font-bold text-3xl text-primary">Category</h1>
+      <h1 className="text-3xl text-primary font-bold">Category</h1>
       <div className="mt-4">
-        <FormCategory />
+        <TableCategory />
       </div>
     </section>
   );

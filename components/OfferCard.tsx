@@ -4,7 +4,7 @@ import React from "react";
 
 export default function OfferCard() {
   return (
-    <div className="border rounded-md flex flex-col p-4 max-w-[392px]">
+    <div className="border rounded-md flex flex-col p-4 w-full max-w-[392px]">
       {/* Header */}
       <div className="mb-4 flex items-center justify-between">
         <div className="flex items-center gap-2">
@@ -13,7 +13,7 @@ export default function OfferCard() {
               src={"/images.png"}
               alt="Logo Company"
               fill
-              sizes="100vw"
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
               className="object-cover"
             />
           </div>

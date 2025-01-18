@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Poppins, Righteous } from "next/font/google";
 import "./globals.css";
 import ToastSonnerContaier from "@/components/ToasSonner";
+import { ClerkProvider } from "@clerk/nextjs";
 
 const righteous = Righteous({
   variable: "--font-righteous",
@@ -26,13 +27,15 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" data-theme="light">
-      <body
-        className={`${righteous.variable} ${poppins.variable} font-poppins min-h-screen flex flex-col`}
-      >
-        {children}
-        <ToastSonnerContaier />
-      </body>
-    </html>
+    <ClerkProvider>
+      <html lang="en" data-theme="light">
+        <body
+          className={`${righteous.variable} ${poppins.variable} font-poppins min-h-screen flex flex-col`}
+        >
+          {children}
+          <ToastSonnerContaier />
+        </body>
+      </html>
+    </ClerkProvider>
   );
 }

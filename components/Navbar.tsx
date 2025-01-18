@@ -1,3 +1,4 @@
+import { SignedIn, SignedOut, SignInButton, UserButton } from "@clerk/nextjs";
 import { LogOutIcon } from "lucide-react";
 import Link from "next/link";
 
@@ -69,10 +70,17 @@ const Navbar = () => {
           >
             Employers
           </Link>
-          <button className="btn font-semibold hover:btn-neutral bg-primary-shade-5 capitalize text-white rounded-full px-6">
-            <LogOutIcon size={16} />
-            sign up
-          </button>
+          <SignedOut>
+            <SignInButton mode="modal">
+              <button className="btn font-semibold hover:btn-neutral bg-primary-shade-5 capitalize text-white rounded-full px-6">
+                <LogOutIcon size={16} />
+                sign up
+              </button>
+            </SignInButton>
+          </SignedOut>
+          <SignedIn>
+            <UserButton />
+          </SignedIn>
         </div>
       </div>
     </header>

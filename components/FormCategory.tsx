@@ -2,10 +2,13 @@
 
 import React, { useActionState, useEffect } from "react";
 import { toast } from "sonner";
-import { categoryAction } from "@/actions/action-category";
+import { createCategoryAction } from "@/actions/category";
 
 export default function FormCategory() {
-  const [state, action, pending] = useActionState(categoryAction, undefined);
+  const [state, action, pending] = useActionState(
+    createCategoryAction,
+    undefined,
+  );
 
   useEffect(() => {
     if (state?.data) {

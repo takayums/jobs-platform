@@ -20,3 +20,9 @@ export type FormState =
       message?: string;
     }
   | undefined;
+
+export enum JOB_TYPE {
+  FULL_TIME = "full-time",
+  PART_TIME = "part-time",
+  CONTRACT = "contract",
+}

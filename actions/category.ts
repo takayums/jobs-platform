@@ -35,6 +35,8 @@ export async function createCategoryAction(
     if (!category.ok) {
       return { error: "Failed to create category" };
     }
+    const data = await category.json();
+    return data;
   } catch (error) {
     console.log(error);
   }

@@ -1,5 +1,4 @@
 import FormCategory from "@/components/FormCategory";
-import React from "react";
 
 export default function CreateCategory() {
   return (

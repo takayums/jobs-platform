@@ -8,13 +8,13 @@ export default function Hero() {
           Start Your Job Journey
         </h1>
         <form className="max-w-[808px] w-full mt-[32px]">
-          <label className="w-full input h-20 rounded-full py-5 pe-2 ps-[32px] text-xl placeholder:font-medium input-bordered flex items-center gap-2">
+          <label className="w-full input h-20 relative rounded-full py-5 pe-2 ps-[32px] text-xl placeholder:font-medium input-bordered flex items-center gap-2">
             <input
               type="text"
               className="grow"
               placeholder="Junior or Intern Position"
             />
-            <div className="rounded-full bg-primary-shade-100 size-16 flex items-center justify-center border">
+            <div className="rounded-full bg-primary-shade-100 absolute top-1/2 right-3 -translate-y-1/2 size-16 flex items-center justify-center border">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 16 16"

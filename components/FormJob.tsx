@@ -1,7 +1,12 @@
+"use client";
+
+import { useActionState } from "react";
 import InputForm from "./InputForm";
 import Textarea from "./Textarea";
 
 export default function FormJob() {
+  const [state, action, pending] = useActionState();
+
   return (
     <div className="w-full mx-auto max-w-2xl">
       <form action="" className="space-y-3 w-full">

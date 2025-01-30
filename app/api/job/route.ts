@@ -2,6 +2,20 @@ import dbConnect from "@/config/db";
 import Job from "@/models/job";
 import { NextResponse } from "next/server";
 
+// Get All Job
+export async function GET() {
+  try {
+    await dbConnect();
+    const data = await Job.find({});
+    return Response.json({ message: "Success", data: data });
+  } catch (error) {
+    return Response.json({
+      errors: error,
+    });
+  }
+}
+
+// Post Job
 export async function POST(req: Request) {
   const {
     jobType,

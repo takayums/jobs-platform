@@ -35,8 +35,6 @@ export async function createCategoryAction(
     if (!category.ok) {
       return { error: "Failed to create category" };
     }
-    const data = await category.json();
-    return data;
   } catch (error) {
     console.log(error);
   }
@@ -94,7 +92,7 @@ export async function deleteCategoryAction(id: string) {
     );
 
     if (!category.ok) {
-      return { error: "Failed to create category" };
+      return { error: "Failed to delete category" };
     }
   } catch (error) {
     console.log(error);

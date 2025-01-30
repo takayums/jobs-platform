@@ -78,15 +78,40 @@ export async function createJobAction(
     if (!job.ok) {
       return { error: "Failed to create Job" };
     }
-
-    const data = await job.json();
-    return data;
   } catch (error) {
     console.log("error action", error);
   }
   revalidatePath("/admin/job");
   redirect("/admin/job");
 }
+
 // Action Update Job
+//
 // Action Read Job
+export async function getJobAction() {
+  try {
+    const job = await fetch(`${process.env.NEXT_PUBLIC_LOCALHOST}/api/job`);
+    const item = await job.json();
+    return item;
+  } catch (error) {
+    console.log(error);
+  }
+}
+
 // Action Delete Job
+export async function deleteJobAction(id: string) {
+  const slug = id;
+  try {
+    const job = await fetch(
+      `${process.env.NEXT_PUBLIC_LOCALHOST}/api/job/${slug}`,
+      { method: "DELETE" },
+    );
+
+    if (!job.ok) {
+      return { error: "Failed to delete job" };
+    }
+  } catch (error) {
+    console.log(error);
+  }
+  revalidatePath("/admin/job");
+}

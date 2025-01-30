@@ -5,7 +5,7 @@ export interface CategoryTypes {
 }
 
 export interface JobTypes {
-  id_: string;
+  _id: string;
   jobType: string;
   title: string;
   salary: number;

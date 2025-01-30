@@ -1,9 +1,14 @@
 interface TextareaFormProps
   extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {
   label: string;
+  error?: string;
 }
 
-export default function Textarea({ label, ...props }: TextareaFormProps) {
+export default function Textarea({
+  label,
+  error,
+  ...props
+}: TextareaFormProps) {
   return (
     <label className="form-control">
       <div className="label">
@@ -13,6 +18,7 @@ export default function Textarea({ label, ...props }: TextareaFormProps) {
         className="textarea textarea-bordered h-24"
         {...props}
       ></textarea>
+      {error && <p className="text-sm text-red-600">{error}</p>}
     </label>
   );
 }

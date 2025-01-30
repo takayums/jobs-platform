@@ -24,7 +24,6 @@ export async function POST(req: Request) {
     });
     await newCategory.save();
 
-    console.log("server", newCategory);
     return Response.json({
       message: "Success",
       data: newCategory,

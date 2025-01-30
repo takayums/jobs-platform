@@ -1,22 +1,32 @@
 "use client";
 
-import { useActionState } from "react";
+import { useActionState, useEffect } from "react";
 import InputForm from "./InputForm";
 import Textarea from "./Textarea";
+import { createJobAction } from "@/actions/job";
+import { toast } from "sonner";
+import { CategoryTypes } from "@/libs/types";
 
-export default function FormJob() {
-  const [state, action, pending] = useActionState();
+export default function FormJob({ category }: { category: CategoryTypes[] }) {
+  const [state, action, pending] = useActionState(createJobAction, undefined);
+
+  useEffect(() => {
+    if (state?.data) {
+      toast.success("Job Data Created Successfully");
+    }
+  }, [state?.data]);
 
   return (
     <div className="w-full mx-auto max-w-2xl">
-      <form action="" className="space-y-3 w-full">
-        <div className="flex gap-4">
+      <form action={action} className="space-y-3 w-full">
+        <div className="grid grid-cols-2 gap-4">
           <InputForm
             label="Company Name"
             type="text"
             placeholder="Nama Company"
             name="companyName"
             className="input input-bordered w-full"
+            error={state?.errors?.companyName}
           />
           <InputForm
             label="Contact Phone"
@@ -24,74 +34,95 @@ export default function FormJob() {
             placeholder="No. Hp"
             name="contactPhone"
             className="input input-bordered w-full"
+            error={state?.errors?.contactPhone}
           />
           <InputForm
             label="Contact Email"
             name="contactEmail"
             placeholder="jhondoe@gmail.com"
             type="email"
+            error={state?.errors?.contactEmail}
           />
-        </div>
-        <div className="flex gap-4">
           <InputForm
             label="City"
             type="text"
             placeholder="Nama Kota"
             name="city"
+            error={state?.errors?.city}
           />
-          <InputForm
-            name="state"
-            placeholder="Nama Jalan"
-            type="text"
-            label="State"
-          />
-        </div>
-        <div className="flex gap-4">
           <InputForm
             label="Job Title"
             type="text"
             placeholder="Masukkan Job"
             name="title"
             className="input input-bordered w-full"
+            error={state?.errors?.title}
           />
           <InputForm
             name="salary"
             placeholder="Masukkan Salary"
-            type="text"
+            type="number"
             label="Salary"
+            error={state?.errors?.salary}
           />
-        </div>
-        <div className="flex gap-4">
           <label className="form-control w-full max-w-xs">
             <div className="label">
               <span className="label-text">Category</span>
             </div>
-            <select className="select select-bordered" defaultValue={"default"}>
+            <select
+              name="category"
+              className="select select-bordered"
+              defaultValue={"default"}
+            >
               <option disabled value="default">
-                Pick one
+                Category Job
               </option>
-              <option value="frontend">Frontend Developer</option>
-              <option value="backend">Beckend Developer</option>
-              <option value="mobile">Mobile Developer</option>
+              {category?.map((data: CategoryTypes) => (
+                <option value={data._id} key={data._id}>
+                  {data.name}
+                </option>
+              ))}
             </select>
+            {state?.errors?.category && (
+              <p className="text-sm text-error">{state.errors.category}</p>
+            )}
           </label>
           <label className="form-control w-full max-w-xs">
             <div className="label">
               <span className="label-text">Job Type</span>
             </div>
-            <select className="select select-bordered" defaultValue={"default"}>
+            <select
+              name="jobType"
+              className="select select-bordered"
+              defaultValue={"default"}
+            >
               <option disabled value="default">
-                Pick one
+                Type Job
               </option>
-              <option value="fulltime">Full Time</option>
-              <option value="parttime">Part Time</option>
-              <option value="freetime">Free Time</option>
+              <option value="full-time">Full Time</option>
+              <option value="part-time">Part Time</option>
+              <option value="contract">Contract</option>
             </select>
+            {state?.errors?.jobType && (
+              <p className="text-sm text-red-600">{state.errors.jobType}</p>
+            )}
           </label>
         </div>
-        <Textarea label="Requirtmens" />
-        <Textarea label="Benefits" />
-        <Textarea label="Alamat" />
+        <Textarea
+          label="Requirtmens"
+          name="requirements"
+          error={state?.errors?.requirements}
+        />
+        <Textarea
+          label="Benefits"
+          name="benefits"
+          error={state?.errors?.benefits}
+        />
+        <Textarea
+          label="Alamat"
+          name="address"
+          error={state?.errors?.address}
+        />
         <div className="flex gap-5">
           <div className="form-control">
             <label className="label flex-col items-start cursor-pointer">
@@ -116,7 +147,10 @@ export default function FormJob() {
             </label>
           </div>
         </div>
-        <button type="submit" className="btn bg-primary-shade-100 text-white">
+        <button type="submit" className="btn btn-primary">
+          {pending && (
+            <span className="loading loading-spinner loading-xs"></span>
+          )}
           Submit
         </button>
       </form>

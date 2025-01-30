@@ -6,7 +6,11 @@ const jobSchema = new mongoose.Schema(
     jobType: { type: String, enum: JOB_TYPE, default: JOB_TYPE.FULL_TIME },
     title: { type: String, required: true },
     salary: { type: Number, required: true },
-    category: { type: mongoose.Types.ObjectId, ref: "Category" },
+    category: {
+      type: mongoose.Types.ObjectId,
+      ref: "Category",
+      required: true,
+    },
     remote: { type: Boolean, required: true },
     isPublised: { type: Boolean, require: true },
     requirements: { type: String, required: true },

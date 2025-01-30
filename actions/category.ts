@@ -1,11 +1,11 @@
 "use server";
 
-import { categoryFormSchema, FormState } from "@/libs/utils";
+import { categoryFormSchema, FormStateCategory } from "@/libs/utils";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 
 export async function createCategoryAction(
-  state: FormState,
+  state: FormStateCategory,
   formData: FormData,
 ) {
   const validatedFields = categoryFormSchema.safeParse({
@@ -45,7 +45,10 @@ export async function createCategoryAction(
   redirect("/admin/category");
 }
 
-export async function editCategoryAction(state: FormState, formData: FormData) {
+export async function editCategoryAction(
+  state: FormStateCategory,
+  formData: FormData,
+) {
   const slug = state;
   const validatedFields = categoryFormSchema.safeParse({
     name: formData.get("name"),

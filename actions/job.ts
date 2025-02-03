@@ -86,7 +86,89 @@ export async function createJobAction(
 }
 
 // Action Update Job
-//
+export async function editJobAction(
+  previouseState: FormStateJob,
+  formData: FormData,
+) {
+  const slug = previouseState;
+  const { userId } = await auth();
+
+  const validatedFields = jobFormSchema.safeParse({
+    jobType: formData.get("jobType"),
+    title: formData.get("title"),
+    salary: parseInt(formData.get("salary") as string),
+    category: formData.get("category"),
+    remote: formData.get("remote") === "on" ? true : false,
+    isPublised: formData.get("isPublised") === "on" ? true : false,
+    requirements: formData.get("requirements"),
+    benefits: formData.get("benefits"),
+    address: formData.get("address"),
+    city: formData.get("city"),
+    companyName: formData.get("companyName"),
+    contactPhone: formData.get("contactPhone"),
+    contactEmail: formData.get("contactEmail"),
+    clerkId: userId,
+  });
+
+  // If any form fields are invalid, return early
+  if (!validatedFields.success) {
+    return {
+      errors: validatedFields.error.flatten().fieldErrors,
+    };
+  }
+
+  const {
+    jobType,
+    title,
+    salary,
+    category,
+    remote,
+    isPublised,
+    requirements,
+    benefits,
+    address,
+    city,
+    companyName,
+    contactEmail,
+    contactPhone,
+    clerkId,
+  } = validatedFields.data;
+
+  try {
+    const job = await fetch(
+      `${process.env.NEXT_PUBLIC_LOCALHOST}/api/job/${slug}`,
+      {
+        method: "PUT",
+        headers: { "Content-type": "application/json" },
+        body: JSON.stringify({
+          jobType,
+          title,
+          salary,
+          category,
+          remote,
+          isPublised,
+          requirements,
+          benefits,
+          address,
+          city,
+          companyName,
+          contactEmail,
+          contactPhone,
+          clerkId,
+        }),
+      },
+    );
+
+    if (!job.ok) {
+      return { error: "Failed to create Job" };
+    }
+  } catch (error) {
+    console.log("error action", error);
+  }
+  revalidatePath("/admin/job");
+  redirect("/admin/job");
+}
+
 // Action Read Job
 export async function getJobAction() {
   try {
@@ -95,6 +177,20 @@ export async function getJobAction() {
     return item;
   } catch (error) {
     console.log(error);
+  }
+}
+
+// Action Read Job By Id
+export async function getJobById(slug: string) {
+  try {
+    const data = await fetch(
+      `${process.env.NEXT_PUBLIC_LOCALHOST}/api/job/${slug}`,
+      { method: "GET" },
+    );
+    const item = await data.json();
+    return item;
+  } catch (error) {
+    console.log("Action Error", error);
   }
 }
 

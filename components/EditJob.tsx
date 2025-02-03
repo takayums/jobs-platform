@@ -1,20 +1,13 @@
 "use client";
 
-import { useActionState, useEffect } from "react";
+import React, { useActionState } from "react";
 import InputForm from "./InputForm";
 import Textarea from "./Textarea";
-import { createJobAction } from "@/actions/job";
-import { toast } from "sonner";
+import { editJobAction } from "@/actions/job";
 import { CategoryTypes } from "@/libs/types";
-export default function FormJob({ category }: { category: CategoryTypes[] }) {
-  const [state, action, pending] = useActionState(createJobAction, undefined);
 
-  useEffect(() => {
-    if (state?.data) {
-      toast.success("Job Data Created Successfully");
-    }
-  }, [state?.data]);
-
+export default function EditJob({ data, category }) {
+  const [state, action, pending] = useActionState(editJobAction, data._id);
   return (
     <div className="w-full mx-auto max-w-2xl">
       <form action={action} className="space-y-3 w-full">
@@ -26,6 +19,7 @@ export default function FormJob({ category }: { category: CategoryTypes[] }) {
             name="companyName"
             className="input input-bordered w-full"
             error={state?.errors?.companyName}
+            defaultValue={data.companyName}
           />
           <InputForm
             label="Contact Phone"
@@ -34,6 +28,7 @@ export default function FormJob({ category }: { category: CategoryTypes[] }) {
             name="contactPhone"
             className="input input-bordered w-full"
             error={state?.errors?.contactPhone}
+            defaultValue={data.contactPhone}
           />
           <InputForm
             label="Contact Email"
@@ -41,6 +36,7 @@ export default function FormJob({ category }: { category: CategoryTypes[] }) {
             placeholder="jhondoe@gmail.com"
             type="email"
             error={state?.errors?.contactEmail}
+            defaultValue={data.contactEmail}
           />
           <InputForm
             label="City"
@@ -48,6 +44,7 @@ export default function FormJob({ category }: { category: CategoryTypes[] }) {
             placeholder="Nama Kota"
             name="city"
             error={state?.errors?.city}
+            defaultValue={data.city}
           />
           <InputForm
             label="Job Title"
@@ -56,6 +53,7 @@ export default function FormJob({ category }: { category: CategoryTypes[] }) {
             name="title"
             className="input input-bordered w-full"
             error={state?.errors?.title}
+            defaultValue={data.title}
           />
           <InputForm
             name="salary"
@@ -63,6 +61,7 @@ export default function FormJob({ category }: { category: CategoryTypes[] }) {
             type="number"
             label="Salary"
             error={state?.errors?.salary}
+            defaultValue={data.salary}
           />
           <label className="form-control w-full max-w-xs">
             <div className="label">
@@ -71,7 +70,7 @@ export default function FormJob({ category }: { category: CategoryTypes[] }) {
             <select
               name="category"
               className="select select-bordered"
-              defaultValue={"default"}
+              defaultValue={data.category}
             >
               <option disabled value="default">
                 Category Job
@@ -93,7 +92,7 @@ export default function FormJob({ category }: { category: CategoryTypes[] }) {
             <select
               name="jobType"
               className="select select-bordered"
-              defaultValue={"default"}
+              defaultValue={data.jobType}
             >
               <option disabled value="default">
                 Type Job
@@ -111,16 +110,19 @@ export default function FormJob({ category }: { category: CategoryTypes[] }) {
           label="Requirtmens"
           name="requirements"
           error={state?.errors?.requirements}
+          defaultValue={data.requirements}
         />
         <Textarea
           label="Benefits"
           name="benefits"
           error={state?.errors?.benefits}
+          defaultValue={data.benefits}
         />
         <Textarea
           label="Alamat"
           name="address"
           error={state?.errors?.address}
+          defaultValue={data.address}
         />
         <div className="flex gap-5">
           <div className="form-control">
@@ -130,7 +132,7 @@ export default function FormJob({ category }: { category: CategoryTypes[] }) {
                 type="checkbox"
                 className="toggle"
                 name="isPublised"
-                defaultChecked
+                defaultChecked={data.isPublised}
               />
             </label>
           </div>
@@ -141,7 +143,7 @@ export default function FormJob({ category }: { category: CategoryTypes[] }) {
                 type="checkbox"
                 className="toggle"
                 name="remote"
-                defaultChecked
+                defaultChecked={data.remote}
               />
             </label>
           </div>

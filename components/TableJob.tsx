@@ -25,7 +25,14 @@ export default async function TableJob() {
               <th>{index + 1}</th>
               <td>{item.companyName}</td>
               <td>{item.title}</td>
+
               <td className="space-x-2">
+                <Link
+                  href={`/admin/job/${item._id}`}
+                  className="btn btn-sm btn-success text-white"
+                >
+                  Detail
+                </Link>
                 <Link
                   href={`/admin/job/${item._id}/edit`}
                   className="btn btn-sm btn-info text-white"
